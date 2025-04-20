@@ -10,7 +10,7 @@ public sealed class CategoryRepository(AppDbContext context) : AbstractRepositor
     public async Task<IEnumerable<Category>> GetByDescriptionAsync(string description)
     {
         return await DbSet
-            .Where(x => x.Description.Equals(description, StringComparison.OrdinalIgnoreCase))
+            .Where(x => x.Description.Equals(description))
             .ToListAsync();
     }
 }

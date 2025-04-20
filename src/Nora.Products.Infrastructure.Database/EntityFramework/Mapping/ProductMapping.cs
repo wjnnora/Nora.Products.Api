@@ -15,8 +15,6 @@ public sealed class ProductMapping : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Value).HasColumnType("DECIMAL(18,2)");
         builder.Property(p => p.CreatedAt).HasColumnType("TIMESTAMP");
 
-        builder.HasOne(x => x.Category)
-            .WithOne()
-            .HasForeignKey<Product>(x => x.CategoryId);
+        builder.HasOne(x => x.Category);
     }
 }

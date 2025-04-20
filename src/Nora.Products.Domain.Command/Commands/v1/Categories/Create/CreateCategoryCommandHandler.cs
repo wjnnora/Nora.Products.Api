@@ -30,6 +30,6 @@ public sealed class CreateCategoryCommandHandler(
         var categories = await categoryRepository.GetByDescriptionAsync(request.Description);
 
         if (categories.Any())
-            throw new DomainException($"Category with description {request.Description} already exists");
+            throw new DomainException($"Category with description '{request.Description}' already exists");
     }
 }

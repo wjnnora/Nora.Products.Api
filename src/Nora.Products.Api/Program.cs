@@ -6,8 +6,12 @@ using Nora.Products.Domain.Command.Mappers;
 using Nora.Products.Domain.Query.Queries.v1.Products.GetById;
 using Nora.Products.Infrastructure.Database.EntityFramework;
 using Nora.Products.Infrastructure.Database.EntityFramework.Repositories;
-using Nora.Products.Api.Extensions;
 using Nora.Products.Api.Middlewares;
+using FluentValidation;
+using Nora.Products.Domain.Command.Commands.v1.Categories.Create;
+using FluentValidation.AspNetCore;
+using Nora.Core.Api.MediatR.Extensions;
+using Nora.Core.Api.AutoMapper.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,8 @@ builder.Services.AddMediatR<CreateProductCommandHandler, GetProductByIdQueryHand
 builder.Services.AddEntityFramework<AppDbContext>(builder.Configuration);
 builder.Services.AddRepositories<ProductRepository>();
 builder.Services.AddAutoMapper<ProductProfile>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 
